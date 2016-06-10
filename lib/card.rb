@@ -5,6 +5,19 @@ class Card
 
   attr_reader :suit, :rank
 
+  include Comparable
+  def <=>(other)
+    suit_comparison = SUITS.index(suit) <=> SUITS.index(other.suit)
+    rank_comparison = RANKS.index(rank) <=> RANKS.index(other.rank)
+
+    # compare by suit
+    if suit_comparison == 0
+      rank_comparison
+    else
+      suit_comparison
+    end
+  end
+
   def initialize(rank, suit)
     fail ArgumentError,
          "Suit: '#{suit}' not in #{SUITS}" unless SUITS.include? suit
@@ -16,6 +29,6 @@ class Card
   end
 
   def to_s
-    "#{rank}:#{suit}"
+    "#{rank} of #{suit}"
   end
 end

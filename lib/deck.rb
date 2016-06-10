@@ -2,6 +2,8 @@ require_relative 'card'
 
 # A simple represenation of a deck of playing cards
 class Deck < Array
+
+  # make all 52 cards
   def initialize
     super
     replace(Card::SUITS.map do |suit|
